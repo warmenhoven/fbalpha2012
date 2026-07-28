@@ -192,7 +192,6 @@ else ifneq (,$(filter $(platform), ps3 psl1ght))
     TARGET := $(TARGET_NAME)_libretro_$(platform).a
     ENDIANNESS_DEFINES =  -DWORDS_BIGENDIAN -DMSB_FIRST
     PLATFORM_DEFINES += -D__PS3__
-    EXTERNAL_ZLIB = 1
     STATIC_LINKING = 1
 
     CC = $(PS3DEV)/ppu/bin/ppu-$(COMMONLV)gcc$(EXE_EXT)
@@ -247,14 +246,12 @@ else ifeq ($(platform), vita)
    CXX = arm-vita-eabi-g++$(EXE_EXT)
    AR = arm-vita-eabi-ar$(EXE_EXT)
    PLATFORM_DEFINES += -DVITA
-   EXTERNAL_ZLIB = 1
    STATIC_LINKING = 1
    INCLUDE_7Z_SUPPORT = 0
 
 # CTR (3DS)
 else ifeq ($(platform), ctr)
    TARGET := $(TARGET_NAME)_libretro_$(platform).a
-   EXTERNAL_ZLIB = 1
    CC = $(DEVKITARM)/bin/arm-none-eabi-gcc$(EXE_EXT)
    CXX = $(DEVKITARM)/bin/arm-none-eabi-g++$(EXE_EXT)
    AR = $(DEVKITARM)/bin/arm-none-eabi-ar$(EXE_EXT)
@@ -285,7 +282,6 @@ else ifneq (,$(filter $(platform), ngc wii wiiu))
    AR = $(DEVKITPPC)/bin/powerpc-eabi-ar$(EXE_EXT)
    ENDIANNESS_DEFINES =  -DWORDS_BIGENDIAN -DMSB_FIRST
    PLATFORM_DEFINES := -U__INT32_TYPE__ -U __UINT32_TYPE__ -D__INT32_TYPE__=int
-   EXTERNAL_ZLIB = 1
    STATIC_LINKING = 1
 
    # Nintendo WiiU
@@ -316,7 +312,6 @@ else ifeq ($(platform), libnx)
    PLATFORM_DEFINES := -U__INT32_TYPE__ -U __UINT32_TYPE__ -D__INT32_TYPE__=int
    PLATFORM_DEFINES += -fPIE -I$(LIBNX)/include/ -specs=$(LIBNX)/switch.specs
    PLATFORM_DEFINES += -D__SWITCH__ -DHAVE_LIBNX -DARM -march=armv8-a -mtune=cortex-a57 -mtp=soft
-   EXTERNAL_ZLIB = 1
    STATIC_LINKING = 1
 
 # Emscripten
@@ -324,7 +319,6 @@ else ifeq ($(platform), emscripten)
    TARGET := $(TARGET_NAME)_libretro_$(platform).bc
    PLATFORM_DEFINES := -DUSE_FILE32API
    ENDIANNESS_DEFINES := -DNO_UNALIGNED_MEM
-   EXTERNAL_ZLIB = 1
    STATIC_LINKING = 1
 
 # GCW0
